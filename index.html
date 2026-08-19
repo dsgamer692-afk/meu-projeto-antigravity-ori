@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Converse e interaja em tempo real de forma segura.">
+  <title>Chat Privado</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Configurações do Funil - Carregar primeiro -->
+  <script src="config.js" defer></script>
+  
+  <!-- Lógica da Aplicação -->
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <!-- App Wrapper (Centered container mimicking mobile device) -->
+  <main class="app-container" id="chat-app">
+    
+    <!-- Pre-Landing Profile Screen -->
+    <div class="profile-overlay" id="profile-overlay">
+      <div class="profile-container">
+        
+        <!-- Unified Main Profile Card -->
+        <div class="profile-main-card">
+          <!-- Large Profile Photo with Stories border effect -->
+          <div class="profile-avatar-wrapper">
+            <div class="profile-stories-border">
+              <img src="assets/avatar.jpg" alt="Foto de Perfil" class="profile-large-avatar" id="profile-avatar">
+            </div>
+            <span class="profile-online-badge"></span>
+          </div>
+
+          <!-- Name + Age + City -->
+          <h2 class="profile-name-age"><span id="profile-name">Juliana Mendes</span>, <span id="profile-age">22</span></h2>
+          <p class="profile-city">📍 <span id="profile-city">São Paulo</span></p>
+
+          <!-- Credibility Indicators -->
+          <div class="profile-credibility">
+            <span class="cred-item green"><span class="pulse-dot"></span> Online agora</span>
+            <span class="cred-item font-muted">⚡ Responde rápido</span>
+          </div>
+
+          <!-- Seductive short phrase -->
+          <div class="profile-bio-box">
+            <p class="profile-phrase" id="profile-phrase">Carregando frase...</p>
+          </div>
+
+          <!-- Large CTA Button -->
+          <button class="profile-cta-btn" id="btn-to-welcome">
+            Mandar mensagem para Juliana
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Welcome Screen / Age Verification Overlay -->
+    <div class="welcome-overlay" id="welcome-overlay">
+      <div class="welcome-card">
+        <div class="welcome-logo">🔞</div>
+        <h1 class="welcome-title" id="welcome-title">Aviso de Privacidade</h1>
+        <p class="welcome-desc" id="welcome-desc">Este chat contém mensagens adultas. Você confirma ter 18 anos ou mais e aceita participar da simulação?</p>
+        <button class="btn-primary" id="btn-start">Confirmar e Entrar</button>
+      </div>
+    </div>
+
+    <!-- Chat Header -->
+    <header class="chat-header">
+      <div class="avatar-container">
+        <img src="https://placehold.co/100/12131a/f3f4f6?text=Avatar" alt="Foto de perfil da garota" class="chat-avatar" id="header-avatar">
+        <span class="online-badge"></span>
+      </div>
+      <div class="header-info">
+        <div class="header-name-wrapper">
+          <span class="header-name">Carregando...</span>
+          <!-- Verified Blue Badge SVG -->
+          <svg class="verified-icon" viewBox="0 0 24 24" id="verified-badge">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+          </svg>
+        </div>
+        <span class="header-status" id="header-status">online</span>
+      </div>
+    </header>
+
+    <!-- Chat Message List Area -->
+    <section class="messages-container" id="messages-container" aria-label="Mensagens do chat">
+      <!-- Bubbles will be injected here via app.js -->
+    </section>
+
+    <footer class="chat-footer">
+      <div class="quick-replies-container" id="quick-replies-container" style="display: none; margin-bottom: 0.5rem;"></div>
+      <div class="input-container">
+        
+        <!-- Text Message Input wrapper -->
+        <div class="text-input-wrapper" id="input-text-wrapper">
+          <input type="text" id="chat-input" class="chat-input" placeholder="Digite sua mensagem..." autocomplete="off" disabled>
+          <button class="footer-btn btn-send" id="btn-send" title="Enviar Mensagem" disabled>
+            <!-- Send Icon SVG -->
+            <svg viewBox="0 0 24 24">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Audio Recording Mic Button -->
+        <button class="footer-btn btn-mic" id="btn-mic" title="Gravar Áudio" disabled>
+          <!-- Microphone SVG -->
+          <svg viewBox="0 0 24 24" style="width:20px;height:20px;">
+            <path fill="currentColor" d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/>
+          </svg>
+        </button>
+
+        <!-- Image Upload Button -->
+        <button class="footer-btn btn-image" id="btn-image" title="Enviar Foto" disabled>
+          <!-- Camera Icon SVG -->
+          <svg viewBox="0 0 24 24" style="width:20px;height:20px;">
+            <path fill="currentColor" d="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/>
+          </svg>
+        </button>
+        <input type="file" id="file-input-image" accept="image/*" style="display: none;">
+
+        <!-- Audio Recording active control panel (hidden initially) -->
+        <div class="recording-panel" id="recording-panel">
+          <div class="recording-info">
+            <span class="recording-dot-active"></span>
+            <span class="recording-timer" id="recording-timer">0:00</span>
+            <div class="recording-visualizer">
+              <span class="recording-visualizer-bar"></span>
+              <span class="recording-visualizer-bar"></span>
+              <span class="recording-visualizer-bar"></span>
+              <span class="recording-visualizer-bar"></span>
+              <span class="recording-visualizer-bar"></span>
+            </div>
+          </div>
+          <div class="recording-actions">
+            <button class="btn-record-cancel" id="btn-record-cancel">Cancelar</button>
+            <button class="btn-record-send" id="btn-record-send" title="Enviar Gravação">
+              <!-- Send Record Icon SVG -->
+              <svg viewBox="0 0 24 24">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Image Lightbox (for zooming/fullscreen view of photos) -->
+  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Visualizador de imagem">
+    <button class="lightbox-close" id="lightbox-close" title="Fechar visualização">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+      </svg>
+    </button>
+    <img src="" alt="Imagem ampliada" class="lightbox-img" id="lightbox-img">
+  </div>
+
+
+
+</body>
+</html>

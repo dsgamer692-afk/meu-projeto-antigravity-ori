@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Controle do Chat</title>
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Left Column: Settings Panel -->
+    <main class="settings-column">
+      <header class="settings-header">
+        <h1>Painel de Controle</h1>
+        <p>Configure a persona do chat e a inteligência artificial da Juliana.</p>
+      </header>
+
+      <form id="admin-form">
+        <!-- Seção Persona -->
+        <fieldset>
+          <legend>Perfil da Persona (Juliana)</legend>
+          
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="admin-persona-name">Nome do Avatar:</label>
+              <input type="text" id="admin-persona-name" required placeholder="Ex: Juliana Mendes">
+            </div>
+            <div class="form-group flex-1">
+              <label for="admin-persona-age">Idade:</label>
+              <input type="number" id="admin-persona-age" required placeholder="22">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="admin-persona-city">Cidade / Localização:</label>
+            <input type="text" id="admin-persona-city" required placeholder="Ex: São Paulo">
+          </div>
+
+          <div class="form-group">
+            <label for="admin-persona-avatar">Caminho ou URL da Foto de Perfil:</label>
+            <input type="text" id="admin-persona-avatar" required placeholder="Ex: assets/avatar.jpg">
+            <small class="form-help">Você pode usar a foto local (<code>assets/avatar.jpg</code>) ou colar o link de uma imagem da internet.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="admin-persona-phrase">Frase de Boas-Vindas (Bio):</label>
+            <textarea id="admin-persona-phrase" rows="3" required placeholder="Frase exibida no card inicial antes do chat..."></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Seção Inteligência Artificial -->
+        <fieldset>
+          <legend>Configurações da IA (Gemini)</legend>
+          
+          <div class="form-group">
+            <label for="admin-gemini-key">Gemini API Key (Google AI Studio):</label>
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.25rem;">
+              <input type="password" id="admin-gemini-key" placeholder="Cole sua chave API (AI Studio) aqui..." style="flex: 1; margin-bottom: 0;">
+              <button type="button" id="btn-test-key" class="btn-secondary" style="width: auto; padding: 0 1rem; font-size: 0.85rem; border-radius: 8px; cursor: pointer; border: 1px solid var(--border-light); background: var(--bg-tertiary); color: var(--text-main);">Testar Chave</button>
+            </div>
+            <div id="key-test-status" style="font-size: 0.85rem; margin-top: 0.25rem; font-weight: 500; min-height: 1.2rem;"></div>
+            <small class="form-help">Pegue uma chave gratuita no <a href="https://aistudio.google.com/" target="_blank">Google AI Studio</a>.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="admin-chat-mode">Modo de Conversa:</label>
+            <select id="admin-chat-mode">
+              <option value="hybrid">Híbrido (Funil Estático + IA dinâmica após o término)</option>
+              <option value="ai">Apenas IA (Gemini responde tudo imediatamente)</option>
+              <option value="static">Apenas Funil Estático (Sem Inteligência Artificial)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="admin-system-prompt">Instruções do Sistema (System Prompt):</label>
+            <textarea id="admin-system-prompt" rows="7" placeholder="Escreva as diretrizes de personalidade para a IA..."></textarea>
+            <small class="form-help">Defina o tom de voz, regras da persona, gírias e o objetivo de vendas (VIP).</small>
+          </div>
+        </fieldset>
+
+        <!-- Seção Funil & Vendas -->
+        <fieldset>
+          <legend>Fluxo de Vendas (Pack & Pix)</legend>
+          
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="admin-pix-key">Chave PIX (E-mail):</label>
+              <input type="text" id="admin-pix-key" required placeholder="Ex: marianinab1@gmail.com">
+            </div>
+            <div class="form-group flex-1">
+              <label for="admin-pix-name">Nome do Titular:</label>
+              <input type="text" id="admin-pix-name" required placeholder="Ex: Maria">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="admin-audio1-path">Áudio 1 (Boas-vindas):</label>
+              <input type="text" id="admin-audio1-path" required placeholder="Ex: assets/audio1.mp3">
+            </div>
+            <div class="form-group flex-1">
+              <label for="admin-audio-deonde-path">Áudio Downsell (Número por R$ 3,50):</label>
+              <input type="text" id="admin-audio-deonde-path" required placeholder="Ex: assets/audio_deonde.mp3">
+            </div>
+            <div class="form-group flex-1">
+              <label for="admin-audio2-path">Áudio 3 (Antes Tabela):</label>
+              <input type="text" id="admin-audio2-path" required placeholder="Ex: assets/audio2.mp3">
+            </div>
+            <div class="form-group flex-1">
+              <label for="admin-audio3-path">Áudio 4 (Vídeo chamada):</label>
+              <input type="text" id="admin-audio3-path" required placeholder="Ex: assets/audio3.mp3">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="admin-previa-sozinha">Link/Caminho Prévia Sozinha:</label>
+              <input type="text" id="admin-previa-sozinha" required placeholder="Ex: assets/previa_sozinha.mp4">
+            </div>
+            <div class="form-group flex-1">
+              <label for="admin-previa-transando">Link/Caminho Prévia Transando:</label>
+              <input type="text" id="admin-previa-transando" required placeholder="Ex: assets/previa_transando.mp4">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="admin-tabela-imagem">Caminho da Foto da Tabela de Preço:</label>
+            <input type="text" id="admin-tabela-imagem" required placeholder="Ex: assets/tabela.png">
+          </div>
+
+          <div class="form-group">
+            <label for="admin-pack-850">Link do Drive (Pacote R$ 8,50):</label>
+            <input type="text" id="admin-pack-850" required placeholder="Cole o link do Google Drive para o pacote de R$ 8,50...">
+          </div>
+
+          <div class="form-group">
+            <label for="admin-pack-1500">Link do Drive (Pacote R$ 15,00):</label>
+            <input type="text" id="admin-pack-1500" required placeholder="Cole o link do Google Drive para o pacote de R$ 15,00...">
+          </div>
+        </fieldset>
+
+        <div class="admin-actions">
+          <button type="button" class="btn-secondary" id="btn-admin-reset">Resetar Padrão</button>
+          <button type="submit" class="btn-primary" id="btn-admin-save">Salvar e Aplicar</button>
+        </div>
+      </form>
+    </main>
+
+    <!-- Right Column: Live Iframe Preview -->
+    <aside class="preview-column">
+      <div class="preview-sticky">
+        <div class="preview-title">Visualização em Tempo Real (Demonstrativo)</div>
+        <div class="phone-mockup">
+          <div class="phone-speaker"></div>
+          <div class="phone-screen">
+            <iframe id="preview-iframe" src="index.html" title="Chat Live Preview"></iframe>
+          </div>
+          <div class="phone-button"></div>
+        </div>
+        <button type="button" class="btn-secondary" id="btn-reload-preview" style="margin-top: 1rem; width: auto; align-self: center;">
+          🔄 Recarregar Visualização
+        </button>
+      </div>
+    </aside>
+
+  </div>
+
+</body>
+</html>
